@@ -1,0 +1,100 @@
+# /swagger/response.schema.yaml
+components:
+  schemas:
+    book_reg_res:
+      properties:
+        status:
+          type: integer
+          description: 응답 코드
+          example: 200
+        message:
+          type: string
+          description: 응답 메시지
+          example: '도서 등록 성공'
+        data:
+          $ref: '#/components/schemas/book'
+    books_res:
+      properties:
+        status:
+          type: integer
+          description: 응답 코드
+          example: 200
+        message:
+          type: string
+          description: 응답 메시지
+          example: '도서 조회 성공'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/book'
+    book_owner_update_res:
+      properties:
+        status:
+          type: integer
+          description: 응답 코드
+          example: 200
+        message:
+          type: string
+          description: 응답 메시지
+          example: '도서 소유자 변경 성공'
+        data:
+          type: string
+          description: 상세 메시지
+          example: Book Owner was updated successfully.
+    book_delete_res:
+      properties:
+        status:
+          type: integer
+          description: 응답 코드
+          example: 200
+        message:
+          type: string
+          description: 응답 메시지
+          example: '도서 삭제 성공'
+        data:
+          type: string
+          description: 상세 메시지
+          example: Book was deleted successfully.
+    book:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 책 제목
+          example: OKGOSU의 엑션스크립트 정석
+        link:
+          type: string
+          description: 링크정보
+          example: http://book.naver.com/bookdb/book_detail.php?bid=6259425
+        image:
+          type: string
+          description: 이미지링크정보
+          example: https://bookthumb-phinf.pstatic.net/cover/062/594/06259425.jpg?type=m1&udate=20141122
+        author:
+          type: string
+          description: 작가
+          example: 옥상훈
+        price:
+          type: string
+          description: 가격
+          example: 48000
+        discount:
+          type: string
+          description: 할인가격
+          example: 43200
+        publisher:
+          type: string
+          description: 출판사
+          example: 에이콘출판
+        pubdate:
+          type: string
+          description: 발행일자
+          example: 20100419
+        isbn:
+          type: string
+          description: ISBN NO.
+          example: 8960771295 9788960771291
+        description:
+          type: string
+          description: 설명
+          example: 액션스크립트의 고수가 되자!「에이콘 웹 프로페셔널」 제24권 『OKGOSU의 액션스크립트 정석』. 'OKGOSU'라는 닉네임으로 13년간 자바개발자로 활동하면서 한국자바개발자협의회의 회장을 역임하기도 한 저자가, 액션스크립트에 관한 모든 것을 설명하고 있다. 2D 그래픽과 3D 그래픽, 애니메이션...

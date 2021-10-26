@@ -17,7 +17,7 @@ const options = {
         host: 'localhost:9090',
         basePath: '/',
     },
-    apis: ['./app/controllers/*.js']
+    apis: ['./app/routes/*.js', './app/swagger/*']
 }
 
 const specs = swaggerJsdoc(options)
