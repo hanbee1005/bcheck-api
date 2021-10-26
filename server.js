@@ -18,6 +18,10 @@ db.sequelize.sync({ force: true }).then(() => {
     console.log('Drop and re-sync db.')
 })
 
+// swagger
+const { swaggerUi, specs } = require('./app/config/swagger')
+app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
+
 // simple route
 app.get("/", (req, res) => {
     res.json({message: "Welcome to bcheck application"})
