@@ -30,6 +30,24 @@ module.exports = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.STRING
         },
+        owner_email: {
+            type: DataTypes.STRING
+        },
+        owner_name: {
+            type: DataTypes.STRING
+        },
+        del_yn: {
+            type: DataTypes.STRING
+        },
+        del_cd: {
+            type: DataTypes.STRING
+        },
+        del_nm: {
+            type: DataTypes.STRING
+        },
+        del_msg: {
+            type: DataTypes.STRING
+        },
     })
 
     return Book
