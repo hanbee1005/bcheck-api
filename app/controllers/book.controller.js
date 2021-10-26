@@ -62,5 +62,26 @@ exports.create = (req, res) => {
 }
 
 // Update Book Owner
+exports.update = (req, res) => {
+    const id = req.params.id
+
+    Book.update(req.body, { where: { id: id } })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: 'Book Owner was updated successfully.'
+                })
+            } else {
+                res.send({
+                    message: `Cannot update Book Owner with id=${id}. Maybe Book was not found or req.body is empty!`
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || `Error updating Book Owner with id=${id}`
+            })
+        })
+}
 
 // Delete Book

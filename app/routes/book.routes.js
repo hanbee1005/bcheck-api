@@ -8,5 +8,8 @@ module.exports = app => {
     // Retrieve all Books
     router.get('/', books.findAll)
 
+    // Update a Book Owner with id
+    router.put('/:id', books.update)
+
     app.use('/api/books', router)
 }
