@@ -53,7 +53,7 @@ components:
           example: 영희
     book_owner_update_req:
       properties:
-        onwner_email:
+        owner_email:
           type: string
           description: 새로운 소유자 이메일
           example: cheol@gmail.com

@@ -55,7 +55,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/books:
+     * /api/books/{id}:
      *    put:
      *      tags:
      *      - Book
@@ -87,7 +87,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/books:
+     * /api/books/{id}:
      *    delete:
      *      tags:
      *      - Book
