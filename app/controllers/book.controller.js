@@ -4,6 +4,27 @@ const Book = db.book
 const Op = db.Sequelize.Op
 
 // Find All Books (with title, owner_name)
+exports.findAll = (req, res) => {
+    const word = req.query.word
+    const condition = word
+        ? { [Op.or]: [
+                { title: {[Op.iLike]: `%${word}%`}},
+                { owner_name: {[Op.iLike]: `%${word}%`}},
+                { isbn: {[Op.iLike]: `%${word}%`}}
+             ]
+            }
+        : null
+
+    Book.findAll({ where: condition })
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || 'Some error occurred while retrieving books.'
+            })
+        })
+}
 
 // Create and Save a new Book
 exports.create = (req, res) => {
