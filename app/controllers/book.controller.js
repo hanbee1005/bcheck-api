@@ -85,3 +85,26 @@ exports.update = (req, res) => {
 }
 
 // Delete Book
+exports.delete = (req, res) => {
+    const id = req.params.id
+
+    req.body.del_yn = 'Y'
+
+    Book.update(req.body, { where: { id: id } })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: 'Book was deleted successfully.'
+                })
+            } else {
+                res.send({
+                    message: `Cannot delete Book Owner with id=${id}. Maybe Book was not found or req.body is empty!`
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || `Error delete Book with id=${id}`
+            })
+        })
+}

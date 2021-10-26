@@ -11,5 +11,8 @@ module.exports = app => {
     // Update a Book Owner with id
     router.put('/:id', books.update)
 
+    // Delete a Book with id
+    router.delete('/:id', books.delete)
+
     app.use('/api/books', router)
 }
