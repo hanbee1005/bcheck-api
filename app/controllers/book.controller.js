@@ -3,6 +3,8 @@ const Book = db.book
 
 const Op = db.Sequelize.Op
 
+const util = require('../utils/common')
+
 // Find All Books (with title, owner_name)
 exports.findAll = (req, res) => {
     const word = req.query.word
@@ -17,12 +19,10 @@ exports.findAll = (req, res) => {
 
     Book.findAll({ where: condition })
         .then(data => {
-            res.send(data)
+            res.json(util.makeResponseBody(200, '도서 조회 성공', data))
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || 'Some error occurred while retrieving books.'
-            })
+            res.status(500).json(util.makeResponseBody(500, err.message || 'Some error occurred while retrieving books.', {}))
         })
 }
 
@@ -52,12 +52,10 @@ exports.create = (req, res) => {
     // Save Book in the database
     Book.create(book)
         .then(data => {
-            res.send(data)
+            res.json(util.makeResponseBody(200, '도서 등록 성공', data))
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || 'Some error occurred while creating the Book.'
-            })
+            res.status(500).json(util.makeResponseBody(500, err.message || 'Some error occurred while creating the Book.', {}))
         })
 }
 
@@ -68,19 +66,13 @@ exports.update = (req, res) => {
     Book.update(req.body, { where: { id: id } })
         .then(num => {
             if (num == 1) {
-                res.send({
-                    message: 'Book Owner was updated successfully.'
-                })
+                res.json(util.makeResponseBody(200, '도서 소유자 변경 성공', 'Book Owner was updated successfully.'))
             } else {
-                res.send({
-                    message: `Cannot update Book Owner with id=${id}. Maybe Book was not found or req.body is empty!`
-                })
+                res.json(util.makeResponseBody(404, '도서 소유자 변경 실패', `Cannot update Book Owner with id=${id}. Maybe Book was not found or req.body is empty!`))
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || `Error updating Book Owner with id=${id}`
-            })
+            res.status(500).json(util.makeResponseBody(500, err.message || `Error updating Book Owner with id=${id}`, {}))
         })
 }
 
@@ -93,18 +85,12 @@ exports.delete = (req, res) => {
     Book.update(req.body, { where: { id: id } })
         .then(num => {
             if (num == 1) {
-                res.send({
-                    message: 'Book was deleted successfully.'
-                })
+                res.json(util.makeResponseBody(200, '도서 삭제 성공', 'Book was deleted successfully.'))
             } else {
-                res.send({
-                    message: `Cannot delete Book Owner with id=${id}. Maybe Book was not found or req.body is empty!`
-                })
+                res.json(util.makeResponseBody(404, '도서 삭제 실패', `Cannot delete Book Owner with id=${id}. Maybe Book was not found or req.body is empty!`))
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || `Error delete Book with id=${id}`
-            })
+            res.status(500).json(util.makeResponseBody(500, err.message || `Error delete Book with id=${id}`, {}))
         })
 }
